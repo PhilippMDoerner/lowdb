@@ -12,7 +12,7 @@ on:
 
 jobs:
   Tests:
-    runs-on: lowdb
+    runs-on: postgres
     strategy:
       matrix:
         nim-version: ['1.0.6', '1.2.6', '1.4.2', 'stable', 'devel']

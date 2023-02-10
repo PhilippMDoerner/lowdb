@@ -3,7 +3,7 @@ name: docs.yml - running github pages
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   api-docs:

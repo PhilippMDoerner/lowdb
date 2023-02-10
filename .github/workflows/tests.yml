@@ -12,8 +12,14 @@ on:
 
 jobs:
   Tests:
-    runs-on: ubuntu-latest
+    runs-on: lowdb
+    strategy:
+      matrix:
+        nim-version: ['1.0.6', '1.2.6', '1.4.2', 'stable', 'devel']
     steps:
-      - uses: actions/checkout@v2
-      - name: Tests
-        run: docker-compose run tests
+      - uses: actions/checkout@v1
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ matrix.nim-version }}
+      - run: nimble install -Y
+      - run: nimble tests -Y

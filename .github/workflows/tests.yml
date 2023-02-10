@@ -15,5 +15,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: postgres tests
+      - name: Tests
         run: docker-compose run tests

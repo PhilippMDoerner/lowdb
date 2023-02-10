@@ -60,7 +60,7 @@ jobs:
 
       - name: Setup docs
         run: |
-          ls
+          ls api-docs
           mv api-docs/apidocs docs/
 
       - name: Deploy

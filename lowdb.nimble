@@ -25,4 +25,4 @@ task benchmark, "Compile the benchmark":
 
 task docs, "Generate docs":
   rmDir "docs/apidocs"
-  exec "nimble doc --outdir:docs/apidocs --project --index:on lowdb/sqlite.nim"
+  exec "nimble doc --outdir:docs/apidocs --project --index:on src/lowdb.nim"

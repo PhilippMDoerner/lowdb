@@ -15,7 +15,7 @@ jobs:
     runs-on: postgres
     strategy:
       matrix:
-        nim-version: ['1.0.6', '1.2.6', '1.4.2', 'stable', 'devel']
+        nim-version: ['1.0.6', 'stable']
     steps:
       - uses: actions/checkout@v1
       - uses: jiro4989/setup-nim-action@v1

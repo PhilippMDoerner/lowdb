@@ -74,13 +74,17 @@
 ## See also
 ## ========
 ##
-## * `ndb/postgres module <postgres.html>`_ for PostgreSQL database wrapper
+## * `lowdb/postgres module <postgres.html>`_ for PostgreSQL database wrapper
 
 {.deadCodeElim: on.}  # dce option deprecated
 
 import strutils, wrappers/sqlite3, options
 
-import db_common
+when NimMajor == 1 and NimMinor <= 7:
+  import std/db_common
+else:
+  import db_connector/db_common
+
 export db_common
 
 type

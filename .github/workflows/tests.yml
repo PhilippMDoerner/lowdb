@@ -5,6 +5,7 @@ on:
     branches:
       - devel
       - master
+      - CI-passing
   pull_request:
     branches:
       - devel
@@ -12,10 +13,25 @@ on:
 
 jobs:
   Tests:
-    runs-on: postgres
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
         nim-version: ['1.0.6', 'stable']
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    name: Nim ${{ matrix.nim }}
+
     steps:
       - uses: actions/checkout@v1
       - uses: jiro4989/setup-nim-action@v1

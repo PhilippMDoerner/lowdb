@@ -5,7 +5,6 @@ on:
     branches:
       - devel
       - master
-      - CI-passing
   pull_request:
     branches:
       - devel

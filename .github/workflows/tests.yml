@@ -12,14 +12,37 @@ on:
 
 jobs:
   Tests:
-    runs-on: postgres
+    timeout-minutes: 30
+
+    name: Nim ${{ matrix.nim-version }}
+    runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        nim-version: ['1.0.6', 'stable']
+        nim-version: ['1.0.6', 'stable', 'devel']
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports: # Needed so we don't need to run in a container
+          - 5432:5432
+
     steps:
       - uses: actions/checkout@v1
       - uses: jiro4989/setup-nim-action@v1
         with:
           nim-version: ${{ matrix.nim-version }}
+
       - run: nimble install -Y
-      - run: nimble tests -Y
+
+      - name: Run tests
+        run: nimble test -Y
+        env:
+          PGHOST: localhost

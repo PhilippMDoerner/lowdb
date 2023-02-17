@@ -17,11 +17,10 @@ jobs:
 
     name: Nim ${{ matrix.nim-version }}
     runs-on: ubuntu-latest
-    container: nimlang/nim:${{ matrix.nim-version }}
 
     strategy:
       matrix:
-        nim-version: ['1.0.6', 'latest']
+        nim-version: ['1.0.6', 'stable']
 
     services:
       postgres:
@@ -33,13 +32,23 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports: # Needed so we don't need to run in a container
+          - 5432:5432
 
     steps:
       - uses: actions/checkout@v1
+      - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ matrix.nim-version }}
+
       - name: Install postgres
         run: |
-          apt update
-          apt install -y libpq-dev
+          sudo apt update
+          sudo apt install -y libpq-dev
 
       - run: nimble install -Y
-      - run: nimble test -Y
+
+      - name: Run tests
+        run: nimble test -Y
+        env:
+          PGHOST: localhost

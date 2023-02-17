@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        nim-version: ['1.0.6', 'stable']
+        nim-version: ['1.0.6', 'stable', 'devel']
 
     services:
       postgres:

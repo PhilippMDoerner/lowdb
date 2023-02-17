@@ -6,6 +6,8 @@ A fork of [db_sqlite](https://nim-lang.org/docs/db_sqlite.html) and [db_postgres
 
 Warning: work in progress, API is a subject of change.
 
+- [API index](https://philippmdoerner.github.io/lowdb/lowdb.html)
+
 # Features
 ### General
   * No more empty strings as a default placeholder value.

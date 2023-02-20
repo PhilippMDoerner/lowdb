@@ -76,7 +76,6 @@
 ##
 ## * `lowdb/postgres module <postgres.html>`_ for PostgreSQL database wrapper
 
-{.deadCodeElim: on.}  # dce option deprecated
 
 import strutils, wrappers/sqlite3, options
 

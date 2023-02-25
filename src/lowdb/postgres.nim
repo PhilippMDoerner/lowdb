@@ -44,10 +44,8 @@
 ##
 ## * `lowdb/sqlite module <sqlite.html>`_ for SQLite database wrapper
 
-import options
-import strutils
-import times
-import wrappers/libpq
+import std/[options, strutils, times, macros]
+import ./wrappers/libpq
 
 when NimMajor == 1 and NimMinor <= 7:
   import std/db_common
@@ -56,7 +54,6 @@ else:
 
 export db_common
 
-import macros
 macro old(x: untyped): untyped =
   when defined(lowdbPostgresOld):
     return x

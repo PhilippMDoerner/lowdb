@@ -77,7 +77,8 @@
 ## * `lowdb/postgres module <postgres.html>`_ for PostgreSQL database wrapper
 
 
-import strutils, wrappers/sqlite3, options
+import std/[strutils, options]
+import ./wrappers/sqlite3
 
 when NimMajor == 1 and NimMinor <= 7:
   import std/db_common

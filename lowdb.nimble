@@ -1,7 +1,8 @@
-version       = "0.1.0"
+version       = "0.1.1"
 author        = "Albert Safin <xzfcpw@gmail.com>" # Original Author of the package
 description   = "Low level db_sqlite and db_postgres forks with a proper typing"
 license       = "MIT"
+srcDir        = "src"
 
 requires "nim >= 0.19.0"
 when NimMajor >= 1 and NimMinor >= 9:

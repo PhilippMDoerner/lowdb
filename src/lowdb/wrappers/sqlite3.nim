@@ -1,6 +1,5 @@
 ## Bindings that are not in ``std/sqlite3`` yet.
 
-{.deadCodeElim: on.}  # dce option deprecated
 when defined(windows):
   when defined(nimOldDlls):
     const Lib = "sqlite3.dll"

@@ -8,6 +8,15 @@ Warning: work in progress, API is a subject of change.
 
 - [API index](https://philippmdoerner.github.io/lowdb/lowdb.html)
 
+# Installation
+Install lowdb with [Nimble](https://github.com/nim-lang/nimble):
+
+    $ nimble install -y lowdb
+
+Add lowdb to your .nimble file:
+
+    requires "lowdb"
+
 # Features
 ### General
   * No more empty strings as a default placeholder value.

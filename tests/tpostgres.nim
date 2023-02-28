@@ -237,6 +237,15 @@ suite "various":
       n.inc
     check n == 2
     db.close()
+    
+  test "enum":
+    type
+      Foo = enum
+        A
+        B
+        C
+    let db = test_open()
+    check Foo(db.getRow(sql"SELECT $1", A).get()[0].i) == A
 
 #  test "instantRows()":
 #    let db = test_open()

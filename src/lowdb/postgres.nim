@@ -113,7 +113,7 @@ proc dbValue*(v: DbValue): DbValue =
   ## Return ``v`` as is.
   v
 
-proc dbValue*(v: SomeOrdinal and not uint64): DbValue =
+proc dbValue*(v: SomeSignedInt | uint8 | uint16 | uint32 | enum): DbValue =
   ## Wrap integer value.
   DbValue(kind: dvkInt, i: v.int64)
 

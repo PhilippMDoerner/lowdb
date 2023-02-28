@@ -96,7 +96,7 @@ type
     dvkString ## SQLITE_TEXT, string
     dvkBlob   ## SQLITE_BLOB, BLOB
     dvkNull   ## SQLITE_NULL, NULL
-  DbValueTypes* = int64|float64|string|DbBlob|DbNull ## \
+  DbValueTypes* = int64|float64|enum|string|DbBlob|DbNull ## \
     ## Possible value types
   DbBlob* = distinct string ## SQLite BLOB value.
   DbNull* = object          ## SQLite NULL value.
@@ -194,7 +194,7 @@ proc dbValue*(v: DbValue): DbValue =
   ## Return ``v`` as is.
   v
 
-proc dbValue*(v: int|int8|int16|int32|int64|uint8|uint16|uint32): DbValue =
+proc dbValue*(v: SomeOrdinal and not uint64): DbValue =
   ## Wrap integer value.
   DbValue(kind: dvkInt, i: v.int64)
 

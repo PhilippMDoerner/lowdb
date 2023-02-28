@@ -303,6 +303,15 @@ suite "various":
     db.exec sql"CREATE TABLE t1 (id SERIAL PRIMARY KEY, value TEXT)"
     let id = db.insertID sql"INSERT INTO t1(value) VALUES ('a')"
     check id == 1
+  
+  test "enum":
+    type
+      Foo = enum
+        A
+        B
+        C
+    let db = open(":memory", "", "", "")
+    check db.getValue(Foo, sql"SELECT ?", A).get() == A
 
 suite "Prepared statement finalization":
 

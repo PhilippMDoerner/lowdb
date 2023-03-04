@@ -328,8 +328,8 @@ proc newRow(L: int): Row =
   for i in 0..L-1: result[i] = DbValue(kind: dvkNull)
 
 proc columnValue[T:DbValueTypes|DbValue](stmt: Pstmt, col: int32): T {.inline.} =
-  when T is int64:
-    stmt.column_int64(col)
+  when T is int64 or T is enum:
+    T(stmt.column_int64(col))
   elif T is float64:
     stmt.column_double(col)
   elif T is string:
@@ -357,6 +357,8 @@ proc columnValue[T:DbValueTypes|DbValue](stmt: Pstmt, col: int32): T {.inline.} 
       DbValue(kind: dvkNull)
     else:
       DbValue(kind: dvkNull)
+  else:
+    {.error: $T & " is not supported"}
 
 proc setRow(stmt: Pstmt, r: var Row) =
   let L = column_count(stmt)

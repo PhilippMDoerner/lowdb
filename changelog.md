@@ -9,3 +9,6 @@
 
 0.1.0 (Febuary 25, 2023)
 -   🎉 initial release.
+
+0.2.0-SNAPSHOT
+- [+] Added support for enums

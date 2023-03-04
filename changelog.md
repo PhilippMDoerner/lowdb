@@ -1,2 +1,2 @@
-0.1.0 (Febuary XX, 2023)
+0.1.0 (Febuary 25, 2023)
 -   🎉 initial release.

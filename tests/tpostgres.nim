@@ -383,9 +383,12 @@ suite "rows-iterator":
     """
     db.exec sql"INSERT INTO t1 VALUES($1, $2)", 1, "foo"
     db.exec sql"INSERT INTO t1 VALUES($1, $2)", 2, "bar"
+    let query = "SELECT * FROM t1"
 
     # When
-    let rows: seq[Row] = db.rows(sql"SELECT * FROM t1").toSeq()
+    var rows: seq[Row] = @[]
+    for row in db.rows(sql query):
+      rows.add row
 
     # Then
     let expectedValue: seq[Row] = @[

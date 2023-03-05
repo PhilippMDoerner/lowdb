@@ -28,29 +28,31 @@ task docs, "Generate docs":
   rmDir "docs/apidocs"
   exec "nimble doc --outdir:docs/apidocs --project --index:on src/lowdb.nim"
 
-import std/[strutils, sequtils, strformat]
 
-let postgresName = "norm-postgres-testcontainer"
-putEnv("PGHOST", "localhost") ## Mandatory for all Postgres tests
-putEnv("PGUSER", "postgres") ## Mandatory for all Postgres tests
-putEnv("PGPASSWORD", "postgres") ## Mandatory for all Postgres tests
-putEnv("PGDATABASE", "postgres") ## Mandatory for all Postgres tests
+when NimMajor >= 1 and NimMinor >= 2: # Prior nim versions don't support commandLineParams
+  import std/[strutils, sequtils, strformat]
 
-proc asSudo(params: seq[string]): bool =
-  return params.anyIt(it == "sudo")
+  let postgresName = "norm-postgres-testcontainer"
+  putEnv("PGHOST", "localhost") ## Mandatory for all Postgres tests
+  putEnv("PGUSER", "postgres") ## Mandatory for all Postgres tests
+  putEnv("PGPASSWORD", "postgres") ## Mandatory for all Postgres tests
+  putEnv("PGDATABASE", "postgres") ## Mandatory for all Postgres tests
 
-task startContainers, "Starts a postgres container for running tests against":
-  var command = fmt"""docker run -d -e POSTGRES_PASSWORD="postgres" --name {postgresName} --rm -p 5432:5432 postgres"""
+  proc asSudo(params: seq[string]): bool =
+    return params.anyIt(it == "sudo")
 
-  if commandLineParams.asSudo():
-    command = fmt"sudo {command}"
+  task startContainers, "Starts a postgres container for running tests against":
+    var command = fmt"""docker run -d -e POSTGRES_PASSWORD="postgres" --name {postgresName} --rm -p 5432:5432 postgres"""
 
-  exec command
+    if commandLineParams.asSudo():
+      command = fmt"sudo {command}"
 
-task stopContainers, "Stops a postgres container used for norm tests":
-  var command = fmt"""docker stop {postgresName}"""
+    exec command
 
-  if commandLineParams.asSudo():
-    command = fmt"sudo {command}"
+  task stopContainers, "Stops a postgres container used for norm tests":
+    var command = fmt"""docker stop {postgresName}"""
 
-  exec command
+    if commandLineParams.asSudo():
+      command = fmt"sudo {command}"
+
+    exec command

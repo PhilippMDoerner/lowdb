@@ -258,20 +258,14 @@ suite "getValue()":
       some "a"
     )
 
-    # TODO: Wait for enum fix from amadan
-    # type Foo = enum
-    #   A, B, C
-    # test(
-    #   "SELECT 1",
-    #   Foo,
-    #   some Foo.B
-    # )
-    #
-    # test(
-    #   "SELECT 'B'",
-    #   Foo,
-    #   some Foo.B
-    # )
+    type Foo = enum
+      A, B, C
+    test(
+      "SELECT 1",
+      Foo,
+      some Foo.B
+    )
+
 
 suite "getAllRows()":
   setup:

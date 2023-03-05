@@ -471,15 +471,14 @@ suite "insertID":
     When inserting a value into it using insertID
     Then it should insert the row with a generated id.
   """:
-    let dbConn = open(":memory:", "", "", "")
     # Given
-    dbConn.exec sql"CREATE TABLE t1 (id INTEGER PRIMARY KEY, value TEXT)"
+    db.exec sql"CREATE TABLE t1 (id INTEGER PRIMARY KEY, value TEXT)"
 
     # When
-    let id = dbConn.insertID sql"INSERT INTO t1(value) VALUES ('a')"
+    let id = db.insertID sql"INSERT INTO t1(value) VALUES ('a')"
 
     # Then
-    let rows: seq[Row] = dbConn.getAllRows(sql "SELECT * FROM t1").toSeq()
+    let rows: seq[Row] = db.getAllRows(sql "SELECT * FROM t1").toSeq()
     let expectedValue: seq[Row] = @[
       @[
         DbValue(kind: dvkInt, i: id),

@@ -1,4 +1,4 @@
-version       = "0.1.1"
+version       = "0.2.0"
 author        = "Philipp Doerner" # Original Author of the package
 description   = "Low level db_sqlite and db_postgres forks with a proper typing"
 license       = "MIT"

@@ -14,7 +14,7 @@ task test_sqlite, "Run the test suite (sqlite)":
   exec "nim c -r tests/tsqlite.nim"
 
 task test_postgres, "Run the test suite (postgres) (NOTE: Start the containers first with `nimble startContainers`)":
-  exec "nim c -r tests/tpostgres.nim"
+  exec "nim c -r --define:lowdbPostgresOld tests/tpostgres.nim"
 
 task test, "Run the test suite (all) (NOTE: Start the container first with `nimble startContainers`)":
   testSqliteTask()

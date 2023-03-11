@@ -658,7 +658,7 @@ proc getAllRows*(db: DbConn, stmtName: SqlPrepared,
     result.add(r)
 
 iterator rows*(db: DbConn, stmtName: SqlPrepared,
-               args: varargs[string, `$`]): RowOld {.old, tags: [ReadDbEffect].} =
+               args: varargs[string, `$`]): RowOld {.old, tags: [ReadDbEffect, TimeEffect].} =
   ## same as `fastRows`, but slower and safe.
   for r in items(getAllRows(db, stmtName, args)): yield r
 

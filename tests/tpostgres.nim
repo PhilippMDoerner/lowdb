@@ -1,5 +1,5 @@
 import lowdb/postgres
-import std/[os, options, times, unittest, math, sequtils]
+import std/[os, options, times, unittest, math, sequtils, enumerate]
 
 proc test_open(): DbConn =
   open(
@@ -415,76 +415,77 @@ suite "rows-iterator":
     check res == "a123b123c123"
 
 
-# suite "instantrows-iterator":
-#   setup:
-#     let db = test_open()
+suite "instantrows-iterator":
+  setup:
+    let db = test_open()
 
-#   teardown:
-#     close db
+  teardown:
+    db.exec sql "DROP TABLE IF EXISTS t1"
+    close db
 
-#   test """
-#     Given a table with multiple columns and rows in it and a query that selects all of it
-#     When executing it with instantRows
-#     Then it should provide an iterator over all rows in the table where all column-values are strings
-#   """:
-#     # Given
-#     db.exec sql"""
-#       CREATE TABLE t1 (
-#           Id    INTEGER PRIMARY KEY,
-#           S     TEXT
-#       )
-#     """
-#     db.exec sql"INSERT INTO t1 VALUES($1, $2)", 1, "foo"
-#     db.exec sql"INSERT INTO t1 VALUES($1, $2)", 2, "bar"
+  test """
+    Given a table with multiple columns and rows in it and a query that selects all of it
+    When executing it with instantRows
+    Then it should provide an iterator over all rows in the table where all column-values are strings
+  """:
+    # Given
+    db.exec sql"""
+      CREATE TABLE t1 (
+          Id    INTEGER PRIMARY KEY,
+          S     TEXT
+      )
+    """
+    db.exec sql"INSERT INTO t1 VALUES($1, $2)", 1, "foo"
+    db.exec sql"INSERT INTO t1 VALUES($1, $2)", 2, "bar"
 
-#     # When
-#     for index, row in enumerate(db.instantRows(sql"SELECT * FROM t1")):
-#       # Then
-#       case index
-#       of 0:
-#         check row[0] == "1"
-#         check row[1] == "foo"
+    # When
+    for index, row in enumerate(db.instantRows(sql"SELECT * FROM t1")):
+      # Then
+      case index
+      of 0:
+        check row[0] == "1"
+        check row[1] == "foo"
 
-#       of 1:
-#         check row[0] == "2"
-#         check row[1] == "bar"
+      of 1:
+        check row[0] == "2"
+        check row[1] == "bar"
 
-#       else:
-#         raise newException(ValueError, "Unreachable statement")
+      else:
+        raise newException(ValueError, "Unreachable statement")
 
-#       check row.len == 2
+      check row.len == 2
 
-#   test """
-#     Given an iterator via instantRows iterating over a table with data
-#     When accessing a row in it with index and type that DbValue has a kind for
-#     Then it should extract the value from DbValue as that type
-#   """:
-#     # Given
-#     db.exec sql"""
-#       CREATE TABLE t1 (
-#           Id    INTEGER PRIMARY KEY,
-#           S     TEXT
-#       )
-#     """
-#     db.exec sql"INSERT INTO t1 VALUES($1, $2)", 1, "foo"
-#     db.exec sql"INSERT INTO t1 VALUES($1, $2)", 2, "bar"
+  # test """
+  #   Given an iterator via instantRows iterating over a table with data
+  #   When accessing a row in it with index and type that DbValue has a kind for
+  #   Then it should extract the value from DbValue as that type
+  # """:
+  #   # Given
+  #   db.exec sql"""
+  #     CREATE TABLE t1 (
+  #         Id    INTEGER PRIMARY KEY,
+  #         S     TEXT
+  #     )
+  #   """
+  #   db.exec sql"INSERT INTO t1 VALUES($1, $2)", 1, "foo"
+  #   db.exec sql"INSERT INTO t1 VALUES($1, $2)", 2, "bar"
 
-#     # When
-#     for index, row in enumerate(db.instantRows(sql"SELECT * FROM t1")):
-#       # Then
-#       case index
-#       of 0:
-#         check row[0, int64] == 1
-#         check row[1, string] == "foo"
+  #   # When
+  #   for index, row in enumerate(db.instantRows(sql"SELECT * FROM t1")):
+  #     # Then
+  #     case index
+  #     of 0:
+  #       check row[0, int64] == 1
+  #       check row[1, string] == "foo"
 
-#       of 1:
-#         check row[0, int64] == 2
-#         check row[1, string] == "bar"
+  #     of 1:
+  #       check row[0, int64] == 2
+  #       check row[1, string] == "bar"
 
-#       else:
-#         raise newException(ValueError, "Unreachable statement")
+  #     else:
+  #       raise newException(ValueError, "Unreachable statement")
 
-#       check row.len == 2
+  #     check row.len == 2
 
 
 suite "various":
@@ -639,32 +640,32 @@ suite "Prepared statement finalization":
 
   # TODO: find a way to trigger execution failure for `rows()`.
 
-  # test """
-  #   Given a query
-  #   When executing the query with instantRows and superfluous/invalid parameters
-  #   Then raise DbError
-  # """:
-  #   # Given
-  #   let query = "SELECT 1"
+  test """
+    Given a query
+    When executing the query with instantRows and superfluous/invalid parameters
+    Then raise DbError
+  """:
+    # Given
+    let query = "SELECT 1"
 
-  #   # When
-  #   # Then
-  #   expect DbError:
-  #     for row in db.instantRows(sql query, 123): discard
+    # When
+    # Then
+    expect DbError:
+      for row in db.instantRows(sql query, 123): discard
 
   # # TODO: find a way to trigger execution failure for `instantRows()`.
 
-  # test """
-  #   Given a query
-  #   When executing the query with instantRows with columns and superfluous/invalid parameters
-  #   Then raise DbError
-  # """:
-  #   # Given
-  #   var columns: DbColumns
-  #   let query = "SELECT 1"
+  test """
+    Given a query
+    When executing the query with instantRows with columns and superfluous/invalid parameters
+    Then raise DbError
+  """:
+    # Given
+    var columns: DbColumns
+    let query = "SELECT 1"
 
-  #   expect DbError:
-  #     for row in db.instantRows(columns, sql query, 123): discard
+    expect DbError:
+      for row in db.instantRows(columns, sql query, 123): discard
 
   # # TODO: find a way to trigger execution failure for `instantRows()` with columns.
 

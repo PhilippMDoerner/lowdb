@@ -96,7 +96,7 @@ type
     dvkString ## SQLITE_TEXT, string
     dvkBlob   ## SQLITE_BLOB, BLOB
     dvkNull   ## SQLITE_NULL, NULL
-  DbValueTypes* = int64|float64|string|DbBlob|DbNull ## \
+  DbValueTypes* = int64|float64|enum|string|DbBlob|DbNull ## \
     ## Possible value types
   DbBlob* = distinct string ## SQLite BLOB value.
   DbNull* = object          ## SQLite NULL value.
@@ -194,7 +194,7 @@ proc dbValue*(v: DbValue): DbValue =
   ## Return ``v`` as is.
   v
 
-proc dbValue*(v: int|int8|int16|int32|int64|uint8|uint16|uint32): DbValue =
+proc dbValue*(v: SomeSignedInt | uint8 | uint16 | uint32 | enum): DbValue =
   ## Wrap integer value.
   DbValue(kind: dvkInt, i: v.int64)
 
@@ -328,8 +328,8 @@ proc newRow(L: int): Row =
   for i in 0..L-1: result[i] = DbValue(kind: dvkNull)
 
 proc columnValue[T:DbValueTypes|DbValue](stmt: Pstmt, col: int32): T {.inline.} =
-  when T is int64:
-    stmt.column_int64(col)
+  when T is int64 or T is enum:
+    T(stmt.column_int64(col))
   elif T is float64:
     stmt.column_double(col)
   elif T is string:
@@ -357,6 +357,8 @@ proc columnValue[T:DbValueTypes|DbValue](stmt: Pstmt, col: int32): T {.inline.} 
       DbValue(kind: dvkNull)
     else:
       DbValue(kind: dvkNull)
+  else:
+    {.error: $T & " is not supported"}
 
 proc setRow(stmt: Pstmt, r: var Row) =
   let L = column_count(stmt)

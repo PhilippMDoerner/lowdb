@@ -234,7 +234,7 @@ proc tryFinalize(stmt: Pstmt): bool {.raises: [].} =
 
 # Specific
 proc bindArgs(db: DbConn, stmt: var sqlite3.Pstmt, query: SqlQuery,
-              args: seq[DbValue]): bool {.raises: [].} =
+              args: openArray[DbValue]): bool {.raises: [].} =
   var idx: int32 = 0
   for arg in args:
     inc idx
@@ -242,7 +242,7 @@ proc bindArgs(db: DbConn, stmt: var sqlite3.Pstmt, query: SqlQuery,
       return false
   return true
 
-proc tryWithStmt(db: DbConn, query: SqlQuery, args: seq[DbValue],
+proc tryWithStmt(db: DbConn, query: SqlQuery, args: openArray[DbValue],
                  body: proc(stmt: Pstmt): bool {.raises: [], tags: [], gcsafe.}): bool =
   ## A common template dealing with statement initialization and finalization:
   ##
@@ -263,7 +263,7 @@ proc tryWithStmt(db: DbConn, query: SqlQuery, args: seq[DbValue],
     ok = tryFinalize(stmt) and ok
   ok
 
-template withStmt(db: DbConn, query: SqlQuery, args: seq[DbValue],
+template withStmt(db: DbConn, query: SqlQuery, args: openArray[DbValue],
                   body: untyped): untyped =
   ## A common template dealing with statement initialization and finalization:
   ##

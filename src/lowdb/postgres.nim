@@ -220,7 +220,7 @@ proc dbError*(db: DbConn) {.noreturn.} =
   e.msg = $pqErrorMessage(db)
   raise e
 
-proc tryWithStmt(db: DbConn, query: SqlQuery, args: seq[DbValue],
+proc tryWithStmt(db: DbConn, query: SqlQuery, args: openArray[DbValue],
                  expectedStatusType: ExecStatusType,
                  body: proc(res: PPGresult): bool {.raises: [], tags: [], gcsafe.}): bool =
   ## A common template dealing with statement initialization and finalization:

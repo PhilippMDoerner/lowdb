@@ -1,0 +1,59 @@
+nimTitle	sqlite	lowdb/sqlite.html	module src/lowdb/sqlite		0
+nim	dvkInt	lowdb/sqlite.html#dvkInt	DbValueKind.dvkInt		91
+nim	dvkFloat	lowdb/sqlite.html#dvkFloat	DbValueKind.dvkFloat		91
+nim	dvkString	lowdb/sqlite.html#dvkString	DbValueKind.dvkString		91
+nim	dvkBlob	lowdb/sqlite.html#dvkBlob	DbValueKind.dvkBlob		91
+nim	dvkNull	lowdb/sqlite.html#dvkNull	DbValueKind.dvkNull		91
+nim	DbValueKind	lowdb/sqlite.html#DbValueKind	enum DbValueKind		91
+nim	DbValueTypes	lowdb/sqlite.html#DbValueTypes	type DbValueTypes		99
+nim	DbBlob	lowdb/sqlite.html#DbBlob	type DbBlob		101
+nim	DbNull	lowdb/sqlite.html#DbNull	object DbNull		102
+nim	DbValue	lowdb/sqlite.html#DbValue	object DbValue		103
+nim	DbConn	lowdb/sqlite.html#DbConn	type DbConn		116
+nim	Row	lowdb/sqlite.html#Row	type Row		117
+nim	InstantRow	lowdb/sqlite.html#InstantRow	type InstantRow		118
+nim	`==`	lowdb/sqlite.html#==,DbBlob,DbBlob	proc `==`(a: DbBlob; b: DbBlob): bool		122
+nim	`==`	lowdb/sqlite.html#==,DbValue,DbValue	proc `==`(a: DbValue; b: DbValue): bool		126
+nim	dbError	lowdb/sqlite.html#dbError,DbConn	proc dbError(db: DbConn)		138
+nim	dbQuote	lowdb/sqlite.html#dbQuote,string	proc dbQuote(s: string): string		145
+nim	dbQuote	lowdb/sqlite.html#dbQuote,DbBlob	proc dbQuote(s: DbBlob): string		154
+nim	`$`	lowdb/sqlite.html#$,DbValue	proc `$`(v: DbValue): string		161
+nim	dbValue	lowdb/sqlite.html#dbValue,DbValue	proc dbValue(v: DbValue): DbValue		193
+nim	dbValue	lowdb/sqlite.html#dbValue_2	proc dbValue(v: SomeSignedInt | uint8 | uint16 | uint32 | enum): DbValue		197
+nim	dbValue	lowdb/sqlite.html#dbValue,float64	proc dbValue(v: float64): DbValue		201
+nim	dbValue	lowdb/sqlite.html#dbValue,string	proc dbValue(v: string): DbValue		205
+nim	dbValue	lowdb/sqlite.html#dbValue,DbBlob	proc dbValue(v: DbBlob): DbValue		209
+nim	dbValue	lowdb/sqlite.html#dbValue_3	proc dbValue(v: DbNull | type(nil)): DbValue		213
+nim	`?`	lowdb/sqlite.html#?.t,typed	template `?`(v: typed): DbValue		219
+nim	dbValue	lowdb/sqlite.html#dbValue,Option[T]	proc dbValue[T](v: Option[T]): DbValue		223
+nim	tryExec	lowdb/sqlite.html#tryExec,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc tryExec(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): bool		314
+nim	exec	lowdb/sqlite.html#exec,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc exec(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue])		321
+nim	rows	lowdb/sqlite.html#rows.i,DbConn,SqlQuery,varargs[DbValue,dbValue]	iterator rows(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): Row		369
+nim	instantRows	lowdb/sqlite.html#instantRows.i,DbConn,SqlQuery,varargs[DbValue,dbValue]	iterator instantRows(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): InstantRow		380
+nim	instantRows	lowdb/sqlite.html#instantRows.i,DbConn,DbColumns,SqlQuery,varargs[DbValue,dbValue]	iterator instantRows(db: DbConn; columns: var DbColumns; query: SqlQuery;\n            args: varargs[DbValue, dbValue]): InstantRow		411
+nim	`[]`	lowdb/sqlite.html#[],InstantRow,int32,typedesc	proc `[]`(row: InstantRow; col: int32; T: typedesc = string): T:type		422
+nim	len	lowdb/sqlite.html#len,InstantRow	proc len(row: InstantRow): int32		428
+nim	getRow	lowdb/sqlite.html#getRow,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc getRow(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): Option[Row]		433
+nim	getAllRows	lowdb/sqlite.html#getAllRows,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc getAllRows(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): seq[\n    Row]		441
+nim	fastRows	lowdb/sqlite.html#fastRows.i,DbConn,SqlQuery,varargs[DbValue,dbValue]	iterator fastRows(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): Row		450
+nim	getValue	lowdb/sqlite.html#getValue,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc getValue[T: DbValueTypes | DbValue](db: DbConn; query: SqlQuery;\n                                    args: varargs[DbValue, dbValue]): Option[T]		457
+nim	getValue	lowdb/sqlite.html#getValue,DbConn,typedesc,SqlQuery,varargs[DbValue,dbValue]	proc getValue(db: DbConn; T: typedesc; query: SqlQuery;\n         args: varargs[DbValue, dbValue]): Option[T]		466
+nim	tryInsertID	lowdb/sqlite.html#tryInsertID,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc tryInsertID(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): int64		472
+nim	insertID	lowdb/sqlite.html#insertID,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc insertID(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): int64		484
+nim	execAffectedRows	lowdb/sqlite.html#execAffectedRows,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc execAffectedRows(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): int64		495
+nim	close	lowdb/sqlite.html#close,DbConn	proc close(db: DbConn)		504
+nim	open	lowdb/sqlite.html#open,string,string,string,string	proc open(connection, user, password, database: string): DbConn		509
+nim	setEncoding	lowdb/sqlite.html#setEncoding,DbConn,string	proc setEncoding(connection: DbConn; encoding: string): bool		520
+nimgrp	dbquote	lowdb/sqlite.html#dbQuote-procs-all	proc		145
+nimgrp	dbvalue	lowdb/sqlite.html#dbValue-procs-all	proc		193
+nimgrp	getvalue	lowdb/sqlite.html#getValue-procs-all	proc		457
+nimgrp	==	lowdb/sqlite.html#==-procs-all	proc		122
+nimgrp	instantrows	lowdb/sqlite.html#instantRows-iterators-all	iterator		380
+idx	SQLite	lowdb/sqlite.html#sqlite_1	Module sqlite		0
+heading	Parameter substitution	lowdb/sqlite.html#parameter-substitution	 Parameter substitution		0
+heading	Examples	lowdb/sqlite.html#examples	 Examples		0
+heading	Opening a connection to a database	lowdb/sqlite.html#examples-opening-a-connection-to-a-database	  Opening a connection to a database		0
+heading	Creating a table	lowdb/sqlite.html#examples-creating-a-table	  Creating a table		0
+heading	Inserting data	lowdb/sqlite.html#examples-inserting-data	  Inserting data		0
+heading	Larger example	lowdb/sqlite.html#examples-larger-example	  Larger example		0
+heading	See also	lowdb/sqlite.html#examples-see-also	  See also		0

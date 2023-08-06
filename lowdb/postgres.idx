@@ -1,0 +1,48 @@
+nimTitle	postgres	lowdb/postgres.html	module src/lowdb/postgres		0
+nim	DbConn	lowdb/postgres.html#DbConn	type DbConn		64
+nim	RowOld	lowdb/postgres.html#RowOld	type RowOld		65
+nim	Row	lowdb/postgres.html#Row	type Row		67
+nim	InstantRow	lowdb/postgres.html#InstantRow	object InstantRow		68
+nim	SqlPrepared	lowdb/postgres.html#SqlPrepared	type SqlPrepared		71
+nim	dvkBool	lowdb/postgres.html#dvkBool	DbValueKind.dvkBool		73
+nim	dvkInt	lowdb/postgres.html#dvkInt	DbValueKind.dvkInt		73
+nim	dvkFloat	lowdb/postgres.html#dvkFloat	DbValueKind.dvkFloat		73
+nim	dvkString	lowdb/postgres.html#dvkString	DbValueKind.dvkString		73
+nim	dvkTimestamptz	lowdb/postgres.html#dvkTimestamptz	DbValueKind.dvkTimestamptz		73
+nim	dvkOther	lowdb/postgres.html#dvkOther	DbValueKind.dvkOther		73
+nim	dvkNull	lowdb/postgres.html#dvkNull	DbValueKind.dvkNull		73
+nim	DbValueKind	lowdb/postgres.html#DbValueKind	enum DbValueKind		73
+nim	DbValueTypes	lowdb/postgres.html#DbValueTypes	type DbValueTypes		81
+nim	DbOther	lowdb/postgres.html#DbOther	object DbOther		82
+nim	DbNull	lowdb/postgres.html#DbNull	object DbNull		85
+nim	DbValue	lowdb/postgres.html#DbValue	object DbValue		86
+nim	dbValue	lowdb/postgres.html#dbValue,DbValue	proc dbValue(v: DbValue): DbValue		112
+nim	dbValue	lowdb/postgres.html#dbValue_2	proc dbValue(v: SomeSignedInt | uint8 | uint16 | uint32 | enum): DbValue		116
+nim	dbValue	lowdb/postgres.html#dbValue,float64	proc dbValue(v: float64): DbValue		120
+nim	dbValue	lowdb/postgres.html#dbValue,string	proc dbValue(v: string): DbValue		124
+nim	dbValue	lowdb/postgres.html#dbValue,bool	proc dbValue(v: bool): DbValue		128
+nim	dbValue	lowdb/postgres.html#dbValue,DateTime	proc dbValue(v: DateTime): DbValue		132
+nim	dbValue	lowdb/postgres.html#dbValue_3	proc dbValue(v: DbNull | type(nil)): DbValue		136
+nim	`?`	lowdb/postgres.html#?.t,typed	template `?`(v: typed): DbValue		142
+nim	dbValue	lowdb/postgres.html#dbValue,Option[T]	proc dbValue[T](v: Option[T]): DbValue		146
+nim	`==`	lowdb/postgres.html#==,DbValue,DbValue	proc `==`(a: DbValue; b: DbValue): bool		153
+nim	dbError	lowdb/postgres.html#dbError,DbConn	proc dbError(db: DbConn)		216
+nim	dbQuote	lowdb/postgres.html#dbQuote,string	proc dbQuote(s: string): string		269
+nim	`$`	lowdb/postgres.html#$,DbValue	proc `$`(v: DbValue): string		278
+nim	exec	lowdb/postgres.html#exec,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc exec(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue])		323
+nim	rows	lowdb/postgres.html#rows.i,DbConn,SqlQuery,varargs[DbValue,dbValue]	iterator rows(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): Row		413
+nim	fastRows	lowdb/postgres.html#fastRows.i,DbConn,SqlQuery,varargs[DbValue,dbValue]	iterator fastRows(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): Row		424
+nim	getRow	lowdb/postgres.html#getRow,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc getRow(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): Option[Row]		627
+nim	getAllRows	lowdb/postgres.html#getAllRows,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc getAllRows(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): seq[\n    Row]		644
+nim	insertID	lowdb/postgres.html#insertID,DbConn,SqlQuery,varargs[DbValue,dbValue]	proc insertID(db: DbConn; query: SqlQuery; args: varargs[DbValue, dbValue]): int64		697
+nim	close	lowdb/postgres.html#close,DbConn	proc close(db: DbConn)		734
+nim	open	lowdb/postgres.html#open,string,string,string,string	proc open(connection, user, password, database: string): DbConn		738
+nim	setEncoding	lowdb/postgres.html#setEncoding,DbConn,string	proc setEncoding(connection: DbConn; encoding: string): bool		763
+nimgrp	dbvalue	lowdb/postgres.html#dbValue-procs-all	proc		112
+idx	PostgreSQL	lowdb/postgres.html#postgresql_1	Module postgres		0
+heading	Parameter substitution	lowdb/postgres.html#parameter-substitution	 Parameter substitution		0
+heading	Examples	lowdb/postgres.html#examples	 Examples		0
+heading	Opening a connection to a database	lowdb/postgres.html#examples-opening-a-connection-to-a-database	  Opening a connection to a database		0
+heading	Creating a table	lowdb/postgres.html#examples-creating-a-table	  Creating a table		0
+heading	Inserting data	lowdb/postgres.html#examples-inserting-data	  Inserting data		0
+heading	See also	lowdb/postgres.html#see-also	 See also		0

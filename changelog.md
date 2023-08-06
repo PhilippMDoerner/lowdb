@@ -7,6 +7,9 @@
 -   [t]—test suite improvement
 -   [d]—docs improvement
 
+0.2.1 (August 06, 2023)
+- [f] Fixed db_connector not being imported for nim version 2.0.0
+
 0.2.0 (March 11, 2023)
 - [+] Added support for enums
 - [r] Refactored complete test-suite

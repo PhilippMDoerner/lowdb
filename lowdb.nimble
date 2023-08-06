@@ -5,7 +5,7 @@ license       = "MIT"
 srcDir        = "src"
 
 requires "nim >= 1.4.0"
-when NimMajor >= 1 and NimMinor >= 9:
+when NimMajor == 2 or (NimMajor >= 1 and NimMinor >= 9):
   requires "db_connector >= 0.1.0"
 
 skipDirs = @["tests"]

@@ -4,7 +4,7 @@ description   = "Low level db_sqlite and db_postgres forks with a proper typing"
 license       = "MIT"
 srcDir        = "src"
 
-requires "nim >= 2.0.0"
+requires "nim >= 1.7.3"
 requires "db_connector >= 0.1.0"
 
 skipDirs = @["tests"]

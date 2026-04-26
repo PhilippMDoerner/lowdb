@@ -1,5 +1,8 @@
 name: docs.yml - running github pages
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
@@ -73,4 +76,4 @@ jobs:
           target_branch: gh-pages
           build_dir: ./docs
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

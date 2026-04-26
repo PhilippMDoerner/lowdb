@@ -40,19 +40,22 @@ jobs:
         run: nimble --verbose docs
 
       - name: Archive API docs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: api-docs
-          path: |
-            docs/apidocs
+          path: docs/apidocs
+          if-no-files-found: error
 
   deploy-docs:
     needs:
       - api-docs
     runs-on: ubuntu-latest
     steps:
-      - name: Download all docs
-        uses: actions/download-artifact@v3
+      - name: Download API docs
+        uses: actions/download-artifact@v4
+        with:
+          name: api-docs
+          path: ./api-docs
 
       - name: Check files
         run: |
@@ -60,6 +63,7 @@ jobs:
 
       - name: Setup docs
         run: |
+          mkdir -p docs
           mv api-docs docs/
 
       - name: Deploy
